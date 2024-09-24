@@ -1,10 +1,18 @@
+using Microsoft.EntityFrameworkCore;
 using ReyphillNunez_Ap1_P1.Components;
+using ReyphillNunez_Ap1_P1.DAL;
+using ReyphillNunez_Ap1_P1.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+var ConStr = builder.Configuration.GetConnectionString("ConStr");
+
+builder.Services.AddDbContext<Contexto>(o => o.UseSqlite(ConStr));
+builder.Services.AddScoped<RegistroService>();
 
 var app = builder.Build();
 
@@ -17,7 +25,6 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
 app.UseAntiforgery();
 
