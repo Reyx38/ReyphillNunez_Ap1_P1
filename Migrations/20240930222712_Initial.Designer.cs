@@ -10,7 +10,7 @@ using ReyphillNunez_Ap1_P1.DAL;
 namespace ReyphillNunez_Ap1_P1.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20240923233333_Initial")]
+    [Migration("20240930222712_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -19,19 +19,28 @@ namespace ReyphillNunez_Ap1_P1.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
 
-            modelBuilder.Entity("ReyphillNunez_Ap1_P1.Models.Registros", b =>
+            modelBuilder.Entity("ReyphillNunez_Ap1_P1.Models.Prestamos", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("DeudorId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Concepto")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Deuda")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Nombres")
                         .IsRequired()
+                        .HasMaxLength(50)
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("DeudorId");
 
-                    b.ToTable("Registros");
+                    b.ToTable("Prestamos");
                 });
 #pragma warning restore 612, 618
         }
