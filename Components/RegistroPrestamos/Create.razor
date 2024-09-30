@@ -1,0 +1,48 @@
+﻿@page "/Prestamos/Create"
+@rendermode InteractiveServer
+@inject PrestamoService PrestamosServices
+@inject NavigationManager Navigation
+
+
+<EditForm Model="Prestamo" OnValidSubmit="Crear">
+
+	<div class="Container">
+		<div class="card shadow-lg">
+			<div class="card-header">
+				<h2 class="card-title"> Crear Prestamo</h2>
+			</div>
+			<div class="card-body">
+				<lable class="form-label" >Deudor</lable>
+				<InputText class="form-control" @bind-Value="Prestamo.Nombres" placeholder ="Jose Grabiel"></InputText>
+
+				<lable class="form-label">Concepto</lable>
+				<InputText class="form-control" @bind-Value="Prestamo.Concepto" placeholder="Compra de un vehiculo"></InputText>
+
+				<lable class="form-label">Concepto</lable>
+				<InputNumber class="form-control" @bind-Value="Prestamo.Deuda" placeholder="5000$"></InputNumber>
+
+			</div>
+			<div class="card-footer">
+				<a href="#" class="btn btn-outline-primary bi bi-arrow-left">Volver</a>
+				<button type="submit" class="btn btn-outline-success bi bi-floppy">Guardar</button>
+			</div>
+
+		</div>
+
+
+	</div>
+</EditForm>
+
+
+
+
+@code {
+	public Prestamos Prestamo { get; set; } = new Prestamos();
+
+	public async Task Crear()
+	{
+		await PrestamosServices.Guardar(Prestamo);
+		Navigation.NavigateTo("#");
+	}
+
+}
