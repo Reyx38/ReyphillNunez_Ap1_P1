@@ -9,6 +9,7 @@ namespace ReyphillNunez_Ap1_P1.DAL;
 
 		public Contexto(DbContextOptions<Contexto> options) : base(options)
 		{
+
 		}
 	}
 
