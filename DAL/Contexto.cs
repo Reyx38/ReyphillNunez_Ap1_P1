@@ -5,7 +5,7 @@ namespace ReyphillNunez_Ap1_P1.DAL;
 
     public class Contexto : DbContext
     {
-        DbSet<Registros> Registros { get; set; }
+        DbSet<Prestamos> Prestamos { get; set; }
 
 		public Contexto(DbContextOptions<Contexto> options) : base(options)
 		{
