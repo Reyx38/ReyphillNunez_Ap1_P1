@@ -29,7 +29,7 @@ namespace ReyphillNunez_Ap1_P1.Services;
     public async Task<bool> Guardar(Prestamos prestamos)
     {
         if (!await ExisteId(prestamos.DeudorId))
-            return await Guardar(prestamos);
+            return await Insertar(prestamos);
 
         return await Modificar(prestamos);
     }
