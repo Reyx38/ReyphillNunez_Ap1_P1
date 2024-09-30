@@ -14,17 +14,19 @@
 			<div class="card-body">
 				<lable class="form-label" >Deudor</lable>
 				<InputText class="form-control" @bind-Value="Prestamo.Nombres" placeholder ="Jose Grabiel"></InputText>
-
+				<ValidationMessage For="@(() => Prestamo.Nombres)"/>
 				<lable class="form-label">Concepto</lable>
 				<InputText class="form-control" @bind-Value="Prestamo.Concepto" placeholder="Compra de un vehiculo"></InputText>
+				<ValidationMessage For="@(() => Prestamo.Concepto)" />
 
-				<lable class="form-label">Concepto</lable>
+				<lable class="form-label">Deuda</lable>
 				<InputNumber class="form-control" @bind-Value="Prestamo.Deuda" placeholder="5000$"></InputNumber>
+				<ValidationMessage For="@(() => Prestamo.Deuda)" />
 
 			</div>
 			<div class="card-footer">
 				<a href="#" class="btn btn-outline-primary bi bi-arrow-left">Volver</a>
-				<button type="submit" class="btn btn-outline-success bi bi-floppy">Guardar</button>
+				<button type="submit" @onclick="Crear"  class="btn btn-outline-success bi bi-floppy">Guardar</button>
 			</div>
 
 		</div>
