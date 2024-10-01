@@ -12,13 +12,15 @@
 				<h2 class="card-title"> Modificar Prestamo</h2>
 			</div>
 			<div class="card-body">
+				@*Nombre*@
 				<label class="form-label">Deudor</label>
 				<InputText class="form-control" @bind-Value="Prestamo.Nombres" placeholder="Juan perez"></InputText>
 				<ValidationMessage For="@(() => Prestamo.Nombres)" />
+				@*Concepto*@
 				<label class="form-label">Concepto</label>
 				<InputText class="form-control" @bind-Value="Prestamo.Concepto" placeholder="Compra de un vehiculo"></InputText>
 				<ValidationMessage For="@(() => Prestamo.Concepto)" />
-
+				@*Deuda*@
 				<lable class="form-label">Deuda</lable>
 				<InputNumber class="form-control" @bind-Value="Prestamo.Deuda" placeholder="5000$"></InputNumber>
 				<ValidationMessage For="@(() => Prestamo.Deuda)" />
@@ -28,6 +30,8 @@
 				}
 
 			</div>
+			@*Botones*@
+
 			<div class="card-footer">
 				<a href="/Registro/Index" class="btn btn-outline-primary bi bi-arrow-left">Volver</a>
 				<button type="submit" @onclick="Modificar" class="btn btn-outline-success bi bi-floppy">Modificar</button>

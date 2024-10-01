@@ -19,12 +19,15 @@
 						<option value="nombre">Nombre</option>
 					</InputSelect>
 				</div>
+				@*Buscar*@
 				<div class="col-md-8">
 					<div class="input-group">
 						<InputText @bind-Value="ValorFiltro" class="form-control" ></InputText>
 						<button type="button" @onclick="Buscar" class="btn btn-outline-primary bi bi-search"></button>
 					</div>
 				</div>
+				@*Crear*@
+
 				<div class="row mb-3">
 					<div class="col md-8">
 						<a href="/Prestamos/Create" class="btn btn-outline-primary">
@@ -51,10 +54,15 @@
 					@foreach(var Prestamo in ListPrestamos)
 					{
 						<tr class="text-center text-white">
+							@*Id*@
 							<th>@Prestamo.DeudorId</th>
+							@*Nombre*@
 							<th>@Prestamo.Nombres</th>
+							@*Concepto*@
 							<th>@Prestamo.Concepto</th>
+							@*Deuda*@
 							<th>@Prestamo.Deuda $</th>
+							@*Botones*@
 							<td class="text-center">
 								<a href="/Prestamos/Details/@Prestamo.DeudorId" class="btn btn-outline-light  bi-eye"></a>
 							</td>
