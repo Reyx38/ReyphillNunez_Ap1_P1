@@ -1,4 +1,4 @@
-﻿@page "/Prestamos/Details/{DeudorId:int}"
+﻿@page "/Prestamos/Delete/{DeudorId:int}"
 @rendermode InteractiveServer
 @inject PrestamoService PrestamosServices
 @inject NavigationManager Navigation
@@ -18,7 +18,7 @@
 		</div>
 		<div class="card-footer">
 			<a href="/Registro/Index" class="btn btn-outline-primary bi bi-arrow-left">Volver</a>
-			<button type="button" class="btn btn-outline-danger"> Eliminar</button>
+			<button type="button" @onclick="Eliminar" class="btn btn-outline-danger"> Eliminar</button>
 		</div>
 	</div>
 
