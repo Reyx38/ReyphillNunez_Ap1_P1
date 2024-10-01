@@ -5,6 +5,7 @@
 
 
 <EditForm Model="Prestamo" OnValidSubmit="Modificar">
+	<DataAnnotationsValidator />
 
 	<div class="Container">
 		<div class="card shadow-lg">
@@ -24,6 +25,7 @@
 				<lable class="form-label">Deuda</lable>
 				<InputNumber class="form-control" @bind-Value="Prestamo.Deuda" placeholder="5000$"></InputNumber>
 				<ValidationMessage For="@(() => Prestamo.Deuda)" />
+
 				@if (!string.IsNullOrEmpty(mensaje))
 				{
 					<div class="alert alert-success">@mensaje</div>
