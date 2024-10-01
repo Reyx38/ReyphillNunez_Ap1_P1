@@ -38,7 +38,7 @@ namespace ReyphillNunez_Ap1_P1.Services;
         return await _contexto.Prestamos
             .Where(t => t.DeudorId == id).ExecuteDeleteAsync() > 0;
     }
-    public async Task<Prestamos> Buscar(int id)
+    public async Task<Prestamos?> Buscar(int id)
     {
         return await _contexto.Prestamos
             .FirstOrDefaultAsync(t => t.DeudorId == id);
