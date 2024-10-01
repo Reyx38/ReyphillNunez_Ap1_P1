@@ -1,0 +1,41 @@
+﻿@page "/Prestamos/Details/{DeudorId:int}"
+@rendermode InteractiveServer
+@inject PrestamoService PrestamosServices
+@inject NavigationManager Navigation
+<div class="container">
+	<div class="card shadow-lg">
+
+		<div class="card-header">
+			<h2 class="card-title">Eliminar prestamos</h2>
+		</div>
+		<div class="card-body">
+			<ul>
+				<li>Id: @Prestamo.DeudorId</li>
+				<li>Nombre: @Prestamo.Nombres</li>
+				<li>Concepto: @Prestamo.Concepto</li>
+				<li>Deuda: @Prestamo.Deuda</li>
+			</ul>
+		</div>
+		<div class="card-footer">
+			<a href="/Registro/Index" class="btn btn-outline-primary bi bi-arrow-left">Volver</a>
+			<button type="button" class="btn btn-outline-danger"> Eliminar</button>
+		</div>
+	</div>
+
+</div>
+@code {
+	[Parameter]
+	public int DeudorId { get; set; }
+	public Prestamos Prestamo { get; set; } = new Prestamos();
+
+	protected override async Task OnInitializedAsync()
+	{
+		Prestamo = await PrestamosServices.Buscar(DeudorId);
+	}
+
+	public async Task Eliminar()
+	{
+		await PrestamosServices.Delete(Prestamo.DeudorId);
+		Navigation.NavigateTo("/Registro/Index");
+	}
+}
