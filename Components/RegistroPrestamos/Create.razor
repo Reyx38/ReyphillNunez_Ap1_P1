@@ -5,6 +5,7 @@
 
 
 <EditForm Model="Prestamo" OnValidSubmit="Crear">
+	<DataAnnotationsValidator/>
 
 	<div class="Container">
 		<div class="card shadow-lg">
@@ -33,6 +34,7 @@
 
 
 	</div>
+
 </EditForm>
 
 
@@ -44,7 +46,7 @@
 	public async Task Crear()
 	{
 		await PrestamosServices.Guardar(Prestamo);
-		Navigation.NavigateTo("#");
+		Navigation.NavigateTo("/Registro/Index");
 	}
 
 }
