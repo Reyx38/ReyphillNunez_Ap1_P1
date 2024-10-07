@@ -31,7 +31,7 @@
 				<div class="row mb-3">
 					<div class="col md-8">
 						<a href="/Prestamos/Create" class="btn btn-outline-primary">
-						<span class="bi bi-floppy">Crear</span>
+							<span class="bi bi-plus-square">Crear</span>
 						</a>
 					</div>
 
@@ -101,7 +101,7 @@
 			ListPrestamos = await PrestamoServices.Listar(t => t.DeudorId == DeudorId);
 		}else if(Filtro == "nombre")
 		{
-			ListPrestamos = await PrestamoServices.Listar(t => t.Nombres == ValorFiltro);
+			ListPrestamos = await PrestamoServices.Listar(t => t.Nombres.ToLower().Contains(ValorFiltro.ToLower()));
 		}
 		else
 		{
