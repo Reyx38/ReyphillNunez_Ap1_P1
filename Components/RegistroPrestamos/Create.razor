@@ -27,7 +27,7 @@
 			</div>
 			<div class="card-footer">
 				<a href="/Registro/Index" class="btn btn-outline-primary bi bi-arrow-left">Volver</a>
-				<button type="submit" @onclick="Crear"  class="btn btn-outline-success bi bi-floppy">Guardar</button>
+				<button type="submit" class="btn btn-outline-success bi bi-floppy">Guardar</button>
 			</div>
 
 		</div>
@@ -48,5 +48,4 @@
 		await PrestamosServices.Guardar(Prestamo);
 		Navigation.NavigateTo("/Registro/Index");
 	}
-
 }
