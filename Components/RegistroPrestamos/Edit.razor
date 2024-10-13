@@ -1,6 +1,7 @@
 ﻿@page "/Prestamos/Edit/{DeudorId:int}"
 @rendermode InteractiveServer
 @inject PrestamoService PrestamosServices
+@inject DeudorServices DeudorService
 @inject NavigationManager Navigation
 
 
@@ -12,19 +13,25 @@
 			<div class="card-header">
 				<h2 class="card-title"> Modificar Prestamo</h2>
 			</div>
+
 			<div class="card-body">
-				@*Nombre*@
-				<label class="form-label">Deudor</label>
-				<InputText class="form-control" @bind-Value="Prestamo.Nombres" placeholder="Juan perez"></InputText>
-				<ValidationMessage For="@(() => Prestamo.Nombres)" />
-				@*Concepto*@
+
+				<label class="form-label">Seleccionar Deudor </label>
+				<InputSelect class="form-select" @bind-Value="Prestamo.DeudorId">
+					@foreach (var deudor in ListDeudores)
+					{
+						<option value="@deudor.DeudoresId">@deudor.Nombres</option>
+					}
+				</InputSelect>
+				<ValidationMessage For="@(() => Prestamo.DeudorId)" />
+
 				<label class="form-label">Concepto</label>
 				<InputText class="form-control" @bind-Value="Prestamo.Concepto" placeholder="Compra de un vehiculo"></InputText>
 				<ValidationMessage For="@(() => Prestamo.Concepto)" />
 				@*Deuda*@
-				<lable class="form-label">Deuda</lable>
-				<InputNumber class="form-control" @bind-Value="Prestamo.Deuda" placeholder="5000$"></InputNumber>
-				<ValidationMessage For="@(() => Prestamo.Deuda)" />
+				<label class="form-label">Deuda</label>
+				<InputNumber class="form-control" @bind-Value="Prestamo.Monto" placeholder="5000$"></InputNumber>
+				<ValidationMessage For="@(() => Prestamo.Monto)" />
 
 				@if (!string.IsNullOrEmpty(mensaje))
 				{
@@ -53,10 +60,14 @@
 	public int DeudorId { get; set; }
 	public Prestamos Prestamo { get; set; } = new Prestamos();
 	public string mensaje { get; set; }
+	public List<Deudores> ListDeudores { get; set; } = new List<Deudores>();
+
 
 	protected override async Task OnInitializedAsync()
 	{
 		Prestamo = await PrestamosServices.Buscar(DeudorId);
+		ListDeudores = await DeudorService.Listar(d => true);
+
 	}
 
 	public async Task Modificar()

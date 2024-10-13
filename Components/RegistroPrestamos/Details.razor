@@ -1,4 +1,4 @@
-﻿@page "/Prestamos/Details/{DeudorId:int}"
+﻿@page "/Prestamos/Details/{PrestamosId:int}"
 @rendermode InteractiveServer
 @inject PrestamoService PrestamosServices
 @inject NavigationManager Navigation
@@ -10,12 +10,11 @@
 	</div>
 	<div class="card-body">
 		<ul>
-				@*Datos*@
-
-			<li>Id: @Prestamo.DeudorId</li>
-			<li>Nombre: @Prestamo.Nombres</li>
+			@*Datos*@
+			<li>Id: @Prestamo.PrestamoId</li>
+			<li>Nombre: @Prestamo.Deudor?.Nombres</li>
 			<li>Concepto: @Prestamo.Concepto</li>
-			<li>Deuda: @Prestamo.Deuda</li>
+			<li>Deuda: @Prestamo.Monto</li>
 		</ul>
 	</div>
 	<div class="card-footer">
@@ -26,11 +25,11 @@
 </div>
 @code {
 	[Parameter]
-	public int DeudorId { get; set; }
+	public int PrestamosId { get; set; }
 	public Prestamos Prestamo { get; set; } = new Prestamos();
 
 	protected override async Task OnInitializedAsync()
 	{
-		Prestamo = await PrestamosServices.Buscar(DeudorId);
+		Prestamo = await PrestamosServices.Buscar(PrestamosId);
 	}
 }

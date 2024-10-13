@@ -1,0 +1,109 @@
+﻿@page "/Cobro/Index"
+@rendermode InteractiveServer
+@inject CobroServices CobroServices
+@inject NavigationManager navigation
+
+<PageTitle>Registro</PageTitle>
+<div class="container">
+	<div class="card shadow-lg">
+
+		<div class="card-header">
+			<h2 class="card-title text-center">Registro Cobro</h2>
+		</div>
+		<div class="card-body">
+			<div class="row mb-3 ">
+				<div class="col md-8">
+					@*Filro*@
+					<InputSelect class="form-select" @bind-Value="Filtro">
+						<option value="id">Id</option>
+						<option value="concepto">concepto</option>
+					</InputSelect>
+				</div>
+				@*Buscar*@
+				<div class="col-md-8">
+					<div class="input-group">
+						<InputText @bind-Value="ValorFiltro" class="form-control"></InputText>
+						<button type="button" @onclick="Buscar" class="btn btn-outline-primary bi bi-search"></button>
+					</div>
+				</div>
+				@*Crear*@
+
+				<div class="row mb-3">
+					<div class="col md-8">
+						<a href="/Cobro/Create" class="btn btn-outline-primary">
+							<span class="bi bi-plus-square">Crear</span>
+						</a>
+					</div>
+
+				</div>
+
+			</div>
+			<table class="table table-dark table-hover">
+				<thead class="table table-striped ">
+					<tr class="text-center ">
+						<th>Id</th>
+						<th>Deudor Id</th>
+						<th>Fecha</th>
+						<th>Monto</th>
+						<th>Detalles</th>
+						<th>Modificar</th>
+						<th>Eliminar</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var Cobros in ListCobros)
+					{
+						<tr class="text-center text-white">
+							@*Id*@
+							<th>@Cobros.CobroId</th>
+							@*Nombre*@
+							<th>@Cobros.DeudorId</th>
+							@*Concepto*@
+							<th>@Cobros.Fecha?.ToString("dd/MM/yyyy")</th>
+							@*Deuda*@
+							<th>@Cobros.Monto $</th>
+							@*Botones*@
+							<td class="text-center">
+								<a href="/Cobro/Details/@Cobros.CobroId" class="btn btn-outline-light  bi-eye"></a>
+							</td>
+							<td class="text-center">
+								<a href="/Cobro/Edit/@Cobros.CobroId" class="btn btn-outline-light bi bi-pencil-square"></a>
+							</td>
+							<td class="text-center">
+								<a href="/Cobro/Delete/@Cobros.CobroId" class="btn btn-outline-light bi bi-trash"></a>
+							</td>
+
+						</tr>
+					}
+
+				</tbody>
+
+			</table>
+
+		</div>
+
+	</div>
+</div>
+@code {
+	public string Filtro { get; set; } = "id";
+	public string? ValorFiltro { get; set; }
+	public List<Cobros> ListCobros { get; set; } = new List<Cobros>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		ListCobros = await CobroServices.Listar(t => true);
+	}
+
+	public async Task Buscar()
+	{
+		if (Filtro == "id" && int.TryParse(ValorFiltro, out int CobroId))
+		{
+			ListCobros = await CobroServices.Listar(c => c.CobroId == CobroId);
+		}
+		else
+		{
+			ListCobros = await CobroServices.Listar(t => true);
+
+		}
+	}
+}

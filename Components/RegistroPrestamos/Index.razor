@@ -16,7 +16,7 @@
 					@*Filro*@
 					<InputSelect class="form-select" @bind-Value="Filtro">
 						<option value="id">Id</option>
-						<option value="nombre">Nombre</option>
+						<option value="concepto">concepto</option>
 					</InputSelect>
 				</div>
 				@*Buscar*@
@@ -55,22 +55,22 @@
 					{
 						<tr class="text-center text-white">
 							@*Id*@
-							<th>@Prestamo.DeudorId</th>
+							<th>@Prestamo.PrestamoId</th>
 							@*Nombre*@
-							<th>@Prestamo.Nombres</th>
+							<th>@Prestamo.Deudor?.Nombres</th>
 							@*Concepto*@
 							<th>@Prestamo.Concepto</th>
 							@*Deuda*@
-							<th>@Prestamo.Deuda $</th>
+							<th>@Prestamo.Monto $</th>
 							@*Botones*@
 							<td class="text-center">
-								<a href="/Prestamos/Details/@Prestamo.DeudorId" class="btn btn-outline-light  bi-eye"></a>
+								<a href="/Prestamos/Details/@Prestamo.PrestamoId" class="btn btn-outline-light  bi-eye"></a>
 							</td>
 							<td class="text-center">
-								<a href="/Prestamos/Edit/@Prestamo.DeudorId" class="btn btn-outline-light bi bi-pencil-square"></a>
+								<a href="/Prestamos/Edit/@Prestamo.PrestamoId" class="btn btn-outline-light bi bi-pencil-square"></a>
 							</td>
 							<td class="text-center">
-								<a href="/Prestamos/Delete/@Prestamo.DeudorId" class="btn btn-outline-light bi bi-trash"></a>
+								<a href="/Prestamos/Delete/@Prestamo.PrestamoId" class="btn btn-outline-light bi bi-trash"></a>
 							</td>
 					
 						</tr>
@@ -86,7 +86,7 @@
 </div>
 @code {
 	public string Filtro { get; set; } = "id";
-	public string ValorFiltro {get; set;}
+	public string? ValorFiltro {get; set;}
 	public List<Prestamos> ListPrestamos { get; set; } = new List<Prestamos>();
 
 	protected override async Task OnInitializedAsync()
@@ -98,10 +98,10 @@
 	{
 		if(Filtro =="id" && int.TryParse(ValorFiltro, out int DeudorId))
 		{
-			ListPrestamos = await PrestamoServices.Listar(t => t.DeudorId == DeudorId);
-		}else if(Filtro == "nombre")
+			ListPrestamos = await PrestamoServices.Listar(t => t.PrestamoId == DeudorId);
+		}else if(Filtro == "concepto")
 		{
-			ListPrestamos = await PrestamoServices.Listar(t => t.Nombres.ToLower().Contains(ValorFiltro.ToLower()));
+			ListPrestamos = await PrestamoServices.Listar(t => t.Concepto.ToLower().Contains(ValorFiltro.ToLower()));
 		}
 		else
 		{
