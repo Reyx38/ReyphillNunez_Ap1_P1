@@ -10,10 +10,10 @@
 		</div>
 		<div class="card-body">
 			<ul>
-				<li>Id: @Prestamo.DeudorId</li>
-				<li>Nombre: @Prestamo.Nombres</li>
+				<li>Id: @Prestamo.PrestamoId</li>
+				<li>Nombre: @Prestamo.Deudor?.Nombres</li>
 				<li>Concepto: @Prestamo.Concepto</li>
-				<li>Deuda: @Prestamo.Deuda</li>
+				<li>Deuda: @Prestamo.Monto</li>
 			</ul>
 		</div>
 		<div class="card-footer">

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic;
 using ReyphillNunez_Ap1_P1.DAL;
 using ReyphillNunez_Ap1_P1.Models;
 using System.Linq.Expressions;
@@ -11,7 +10,7 @@ namespace ReyphillNunez_Ap1_P1.Services;
     
     public async Task<bool> ExisteId(int id)
     {
-        return await _contexto.Prestamos.AnyAsync(t => t.DeudorId == id);
+        return await _contexto.Prestamos.AnyAsync(t => t.PrestamoId == id);
     }
 
     private async Task<bool> Insertar(Prestamos prestamos)
@@ -20,9 +19,9 @@ namespace ReyphillNunez_Ap1_P1.Services;
         return await _contexto.SaveChangesAsync() > 0;
     }
 
-    private async Task<bool> Modificar(Prestamos prestamos)
+    private async Task<bool> Modificar(Prestamos cobros)
     {
-        _contexto.Update(prestamos);
+        _contexto.Update(cobros);
         return await _contexto.SaveChangesAsync() > 0;
     }
 
@@ -33,20 +32,28 @@ namespace ReyphillNunez_Ap1_P1.Services;
 
         return await Modificar(prestamos);
     }
+
     public async Task<bool> Delete(int id)
     {
         return await _contexto.Prestamos
             .Where(t => t.DeudorId == id).ExecuteDeleteAsync() > 0;
     }
+
     public async Task<Prestamos?> Buscar(int id)
     {
-        return await _contexto.Prestamos
-            .FirstOrDefaultAsync(t => t.DeudorId == id);
+        return await _contexto.Prestamos.Include(p => p.Deudor)
+			.FirstOrDefaultAsync(p => p.PrestamoId == id);
     }
 
-    public async Task<List<Prestamos>> Listar (Expression<Func<Prestamos,bool>> criterio)
+	public async Task<Prestamos?> GetCliente(int id)
+	{
+		return await _contexto.Prestamos.Include(p => p.Deudor)
+			.FirstOrDefaultAsync(p => p.DeudorId == id);
+	}
+
+	public async Task<List<Prestamos>> Listar (Expression<Func<Prestamos,bool>> criterio)
     {
-        return await _contexto.Prestamos
+        return await _contexto.Prestamos.Include(p => p.Deudor)
             .AsNoTracking().Where(criterio).ToListAsync();
     }
 }
