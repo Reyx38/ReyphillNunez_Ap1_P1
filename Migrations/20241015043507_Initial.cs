@@ -20,7 +20,7 @@ namespace ReyphillNunez_Ap1_P1.Migrations
                     CobroId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Fecha = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Monto = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Monto = table.Column<double>(type: "REAL", nullable: false),
                     DeudorId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
@@ -69,8 +69,8 @@ namespace ReyphillNunez_Ap1_P1.Migrations
                     PrestamoId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     Concepto = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Balance = table.Column<decimal>(type: "TEXT", nullable: false),
-                    Monto = table.Column<decimal>(type: "TEXT", nullable: false),
+                    Balance = table.Column<double>(type: "REAL", nullable: false),
+                    Monto = table.Column<double>(type: "REAL", nullable: false),
                     DeudorId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>

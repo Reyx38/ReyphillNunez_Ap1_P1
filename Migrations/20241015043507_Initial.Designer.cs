@@ -11,7 +11,7 @@ using ReyphillNunez_Ap1_P1.DAL;
 namespace ReyphillNunez_Ap1_P1.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20241010191440_Initial")]
+    [Migration("20241015043507_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -33,8 +33,9 @@ namespace ReyphillNunez_Ap1_P1.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal>("Monto")
-                        .HasColumnType("TEXT");
+                    b.Property<double?>("Monto")
+                        .IsRequired()
+                        .HasColumnType("REAL");
 
                     b.HasKey("CobroId");
 
@@ -102,8 +103,8 @@ namespace ReyphillNunez_Ap1_P1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Balance")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Balance")
+                        .HasColumnType("REAL");
 
                     b.Property<string>("Concepto")
                         .IsRequired()
@@ -113,8 +114,8 @@ namespace ReyphillNunez_Ap1_P1.Migrations
                     b.Property<int>("DeudorId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Monto")
-                        .HasColumnType("TEXT");
+                    b.Property<double>("Monto")
+                        .HasColumnType("REAL");
 
                     b.HasKey("PrestamoId");
 
