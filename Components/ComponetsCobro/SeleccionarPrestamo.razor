@@ -1,10 +1,13 @@
 ﻿ <div class="col-auto input-group align-items-center">
+
 	<InputSelect class="form-select" @bind-Value="PrestamoId">
+
  		<option disabled value="0">--- Seleccione una Prestamo ---</option>
         @foreach (var Prestamos in ListPrestamos)
 		{
 		  <option value="@Prestamos.PrestamoId">@Prestamos.PrestamoId -- @Prestamos.Concepto -- (@Prestamos.Balance $)</option>
 		} 
+
 	</InputSelect>
 
 	<label class="col-form-label input-group-text">Valor Cobrado</label>
@@ -35,6 +38,7 @@
 	private async Task ElegirPrestamo()
 	{
 		ErrorMensaje = null;
+
 		@if(PrestamoId > 0)
 		{
 			var prestamoElegido = ListPrestamos.Single(p => p.PrestamoId == PrestamoId);
