@@ -8,13 +8,13 @@ namespace ReyphillNunez_Ap1_P1.Models
 	{
 		[Key]
 		public int CobroId { get; set; }
-		
+
 		[Required(ErrorMessage = "Campo obligatorio")]
-		public DateTime? Fecha {  get; set; } 
+		public DateTime? Fecha { get; set; } = DateTime.Now;
 		
 		[Required (ErrorMessage = "Campo obligatorio")]
 		[Range(1, double.MaxValue)]
-		public decimal? Monto { get; set; }
+		public double? Monto { get; set; }
 
 		[Required (ErrorMessage = "Campo obligatorio")]
 		[Range(1, double.MaxValue,  ErrorMessage = "Debe selecionar un deudor valido")]
