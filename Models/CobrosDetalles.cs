@@ -14,6 +14,6 @@ namespace ReyphillNunez_Ap1_P1.Models
 		public int PrestamoId { get; set; }
 		[Required(ErrorMessage = " Campo obligatorio")]
 		[Range(1, double.MaxValue,ErrorMessage ="Debe agregar un valor cobrado")]
-		public double? ValorCobrado { get; set; }
+		public double ValorCobrado { get; set; }
     }
 }

@@ -1,0 +1,58 @@
+﻿ <div class="col-auto input-group align-items-center">
+
+	<InputSelect class="form-select" @bind-Value="PrestamoId">
+
+ 		<option disabled value="0">--- Seleccione una Prestamo ---</option>
+        @foreach (var Prestamos in ListPrestamos)
+		{
+		  <option value="@Prestamos.PrestamoId">@Prestamos.PrestamoId -- @Prestamos.Concepto -- (@Prestamos.Balance $)</option>
+		} 
+
+	</InputSelect>
+
+	<label class="col-form-label input-group-text">Valor Cobrado</label>
+	<InputNumber class="form-control" @bind-Value="ValorCobrar" placeholder="0.00$" ></InputNumber>
+	<button type="button" class="btn btn-success bi bi-floppy" @onclick="ElegirPrestamo">Agregar detalle</button>					
+</div> 
+@if (!string.IsNullOrEmpty(ErrorMensaje))
+{
+	<div class="alert alert-danger">@ErrorMensaje</div>
+}
+
+@code 
+{
+	[Parameter]
+	public List<Prestamos?> ListPrestamos { get; set; } = [];
+
+	[Parameter]
+	public double ValorCobrar { get; set; }
+
+	[Parameter]
+	public int PrestamoId { get; set; }
+
+	[Parameter]
+	public EventCallback<(Prestamos prestamo, double ValorCobrado)> PrestamoSeleccionado { get; set; }
+
+	public string? ErrorMensaje { get; set; } = null;
+
+	private async Task ElegirPrestamo()
+	{
+		ErrorMensaje = null;
+
+		@if(PrestamoId > 0)
+		{
+			var prestamoElegido = ListPrestamos.Single(p => p.PrestamoId == PrestamoId);
+			if (prestamoElegido.Balance < ValorCobrar)
+			{
+				ErrorMensaje = "El valor cobrado es mayor que el prestamo ";
+				return;
+			}
+
+			await PrestamoSeleccionado.InvokeAsync((prestamoElegido, ValorCobrar));
+		}
+		else
+		{
+			ErrorMensaje = "Debe seleccionar un prestamo o un valor cobrado";
+		}
+	}
+}

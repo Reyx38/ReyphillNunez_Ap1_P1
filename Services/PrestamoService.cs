@@ -15,13 +15,14 @@ namespace ReyphillNunez_Ap1_P1.Services;
 
     private async Task<bool> Insertar(Prestamos prestamos)
     {
+        prestamos.Balance = prestamos.Monto;
         _contexto.Prestamos.Add(prestamos);
         return await _contexto.SaveChangesAsync() > 0;
     }
 
-    private async Task<bool> Modificar(Prestamos cobros)
+    private async Task<bool> Modificar(Prestamos prestamo)
     {
-        _contexto.Update(cobros);
+        _contexto.Update(prestamo);
         return await _contexto.SaveChangesAsync() > 0;
     }
 
